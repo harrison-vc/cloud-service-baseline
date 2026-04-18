@@ -2,6 +2,12 @@
 
 A minimal but production-ready cloud system architecture. This repository serves as a baseline for deploying, monitoring, and troubleshooting cloud-native applications.
 
+## Prerequisites 
+
+- Python 3.11+ 
+- Docker & Docker Compose 
+- AWS CLI (for production integration) 
+
 ## Architecture Overview
 
 - **Application**: Python (FastAPI) providing REST endpoints and health checks.
