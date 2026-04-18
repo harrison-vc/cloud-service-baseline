@@ -1,0 +1,30 @@
+[Unit]
+Description=Cloud Service Baseline (FastAPI)
+After=network.target
+
+[Service]
+# User and Group should be non-root for security
+User=service-user
+Group=service-group
+
+WorkingDirectory=/opt/cloud-service-baseline/app
+Environment="PATH=/opt/cloud-service-baseline/venv/bin"
+Environment="LOG_LEVEL=INFO"
+Environment="PORT=8000"
+
+ExecStart=/opt/cloud-service-baseline/venv/bin/uvicorn app:app --host 0.0.0.0 --port 8000 --log-config logging_config.json
+Restart=on-failure
+RestartSec=5s
+
+# Resource limits to prevent system exhaustion
+LimitNOFILE=65535
+CPUWeight=100
+MemoryLimit=512M
+
+# Security Hardening
+PrivateTmp=true
+ProtectSystem=full
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target
